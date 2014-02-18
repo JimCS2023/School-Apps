@@ -1,0 +1,121 @@
+//Use "decimal" to describe money in this assignment
+//The difference between decimal and double uses 16 bytes and a double uses 8.
+//The designation "m" is a decimal designation
+//Be sure to use Try and Catch 
+//// Program: name of the program
+// Author: your name
+// Date: date created
+// Description : describe what's going on..
+// Use a text box for input and labels for the rest
+// Include a calculate tax, clear and exit button
+//^^^^^^^^^^^ Place this information at the top of the code.
+//<Input: Amount of purchase>
+//<Process: Calculate the state and county sales tax>
+//State sales tax is 4%
+//County sales tax is 2%
+//<Output: The program should display the:
+//    Amount of the purchase
+//    The state sales tax
+//    The county sales tax
+//    The total sales tax
+//    The total of the sale
+//Be sure to place emphasis on expressive code
+//Variables change, constants do not change
+//Constants are usually represented by capital letters and _’s
+
+
+//Sales Tax Calculator
+//Jimi Mielke
+//2/18/2014
+//If you enter the original price of the item you bought, this program will calculate (in currency) the State Sales Tax, the County Sales Tax, 
+//the Total Sales Tax, and the total price.
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Homework_A3b
+{
+    public partial class salesTaxCalculator : Form
+    {
+        public salesTaxCalculator()
+        {
+            InitializeComponent();
+        }
+
+        private void salesTaxCalculator_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void calculateTotalButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Declarations
+
+                const decimal State_Sales_Tax = 0.04m;
+                const decimal County_Sales_Tax = 0.02m;
+
+                decimal inputAmountOfPurchase;
+                decimal amountOfStateSalesTax;
+                decimal amountOfCountySalesTax;
+                decimal amountOfTotalSalesTax;
+                decimal amountOfTotalPurchase;
+
+                //Extract user input data as decimal
+                inputAmountOfPurchase = decimal.Parse(inputAmountOfPurchaseTxtBox.Text);
+
+                //Calculations
+                amountOfStateSalesTax = inputAmountOfPurchase * State_Sales_Tax;
+                amountOfCountySalesTax = inputAmountOfPurchase * County_Sales_Tax;
+                amountOfTotalSalesTax = amountOfStateSalesTax + amountOfCountySalesTax;
+                amountOfTotalPurchase = inputAmountOfPurchase + amountOfStateSalesTax + amountOfCountySalesTax;
+
+                //Set text ouputs toString ("c") as currency
+
+                amountOfStateSalesTaxLabel.Text = amountOfStateSalesTax.ToString("c");
+                amountOfCountySalesTaxLabel.Text = amountOfCountySalesTax.ToString("c");
+                amountOfTotalSalesTaxLabel.Text = amountOfTotalSalesTax.ToString("c");
+                amountOfTotalPurchaseLabel.Text = amountOfTotalPurchase.ToString("c");
+            }
+            catch (Exception ex)
+            {
+                //Display default error message)
+                MessageBox.Show(ex.Message);
+
+            }
+       
+            
+            }
+
+            
+        private void amountOfStateSalesTaxLabel_Click(object sender, EventArgs e)
+        {
+            }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            //Code the Clear button
+            inputAmountOfPurchaseTxtBox.Text = " ";
+            amountOfStateSalesTaxLabel.Text = " ";
+            amountOfCountySalesTaxLabel.Text = " ";
+            amountOfTotalSalesTaxLabel.Text = " ";
+            amountOfTotalPurchaseLabel.Text = " ";
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        }
+   }
+
